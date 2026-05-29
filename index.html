@@ -465,6 +465,42 @@
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
 
+    /* ── EMAIL MODAL ── */
+    #emailModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    #emailModal.open { display: flex; }
+    .email-modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      margin: 1rem;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .email-modal-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .email-modal-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .email-modal-cancel {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      padding: 0.4rem;
+    }
+    .email-modal-cancel:hover { color: var(--text); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       .nav-links { display: none; }
@@ -602,26 +638,6 @@
       <input class="custom-input" id="customAmount" type="number" placeholder="Or enter a custom amount" min="1" oninput="clearAmountBtns()" />
     </div>
 
-    <!-- Personal info -->
-    <div class="form-grid">
-      <div class="form-group">
-        <label>First Name</label>
-        <input class="form-input" type="text" placeholder="Jane" />
-      </div>
-      <div class="form-group">
-        <label>Last Name</label>
-        <input class="form-input" type="text" placeholder="Smith" />
-      </div>
-    </div>
-    <div class="form-group" style="margin-bottom:1rem">
-      <label>Email Address</label>
-      <input class="form-input" type="email" placeholder="jane@example.com" />
-    </div>
-    <div class="form-group" style="margin-bottom:1.5rem">
-      <label>Message (optional)</label>
-      <input class="form-input" type="text" placeholder="In memory of someone, or a note of support..." />
-    </div>
-
     <button class="submit-btn" onclick="handleDonate()">Complete Donation &rarr;</button>
 
     <div class="secure-note">
@@ -717,6 +733,17 @@
   <p style="margin-top:1.5rem; font-size:0.75rem;">© 2026 HopeForward. Registered Charity #12-3456789. All rights reserved.</p>
 </footer>
 
+<!-- EMAIL MODAL -->
+<div id="emailModal">
+  <div class="email-modal-box">
+    <p class="email-modal-title">One last step</p>
+    <p class="email-modal-sub">Enter your email so Paystack can send your receipt.</p>
+    <input id="modalEmail" class="form-input" type="email" placeholder="you@example.com" />
+    <button class="submit-btn" style="margin-top:1rem;" onclick="submitModalEmail()">Proceed to Payment &rarr;</button>
+    <button class="email-modal-cancel" onclick="closeEmailModal()">Cancel</button>
+  </div>
+</div>
+
 <div id="toast">Thank you! Your donation is being processed. 🙏</div>
 
 <script>
@@ -746,26 +773,42 @@
   function handleDonate() {
     const custom = document.getElementById('customAmount').value;
     const amount = custom ? parseFloat(custom) : selectedAmount;
-    const email = document.querySelector('input[type="email"]').value.trim();
-    const firstName = document.querySelectorAll('.form-input')[0].value.trim();
-    const lastName = document.querySelectorAll('.form-input')[1].value.trim();
-
     if (!amount || amount < 1) {
       document.getElementById('customAmount').focus();
       return;
     }
-    if (!email) {
-      document.querySelector('input[type="email"]').focus();
+    document.getElementById('emailModal').classList.add('open');
+    document.getElementById('modalEmail').focus();
+  }
+
+  function closeEmailModal() {
+    document.getElementById('emailModal').classList.remove('open');
+    document.getElementById('modalEmail').value = '';
+  }
+
+  function submitModalEmail() {
+    const email = document.getElementById('modalEmail').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('modalEmail').focus();
       return;
     }
+    closeEmailModal();
+    launchPaystack(email);
+  }
 
+  document.getElementById('modalEmail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitModalEmail();
+    if (e.key === 'Escape') closeEmailModal();
+  });
+
+  function launchPaystack(email) {
+    const custom = document.getElementById('customAmount').value;
+    const amount = custom ? parseFloat(custom) : selectedAmount;
     const handler = PaystackPop.setup({
       key: 'pk_live_943ee93759c37bb4e59140957f88808ad242a33f',
       email: email,
-      amount: Math.round(amount * 100), // kobo
+      amount: Math.round(amount * 100),
       currency: 'NGN',
-      firstname: firstName || undefined,
-      lastname: lastName || undefined,
       label: 'HopeForward Donation',
       onClose: function() {},
       callback: function(response) {
