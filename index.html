@@ -252,6 +252,35 @@
       margin-top: 0.4rem;
     }
     .progress-meta strong { color: var(--text); }
+    .campaign-meta-row {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.85rem;
+    }
+    .campaign-meta-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.6rem 0.4rem;
+      border-right: 1px solid var(--border);
+      background: var(--surface2);
+    }
+    .campaign-meta-item:last-child { border-right: none; }
+    .meta-val { font-size: 1rem; font-weight: 800; color: var(--text); }
+    .meta-key { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.1rem; }
+    .campaign-detail-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+
     .btn-donate {
       width: 100%;
       background: var(--surface2);
@@ -564,47 +593,139 @@
   <p class="section-sub">Every campaign is vetted, transparent, and directly accountable for the funds it receives.</p>
 
   <div class="campaigns-grid">
+
+    <!-- CAMPAIGN 1 -->
     <div class="campaign-card">
-      <div class="campaign-img" style="background: linear-gradient(135deg,#1a2035,#2a1f3d);">💧</div>
+      <div class="campaign-img" style="background: linear-gradient(135deg,#0d1a2e,#1a1040);">
+        <span style="font-size:3.5rem;">💧</span>
+      </div>
       <div class="campaign-body">
-        <span class="campaign-tag">Clean Water</span>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.85rem;">
+          <span class="campaign-tag">Clean Water</span>
+          <span class="campaign-tag" style="color:#f5a623;border-color:#f5a623;background:rgba(245,166,35,0.08);">⚡ 23 days left</span>
+        </div>
         <h3>Wells for the Sahel</h3>
-        <p>Providing clean, safe drinking water to 5 remote villages in Mali and Burkina Faso.</p>
+        <p style="margin-bottom:0.75rem;">Drilling 5 solar-powered boreholes in Mopti (Mali) and Dori (Burkina Faso), serving 8,500 people who currently walk 6+ km daily for contaminated water. Each well includes a hand pump, concrete apron, and a trained community maintenance committee.</p>
+        <div class="campaign-meta-row">
+          <div class="campaign-meta-item"><span class="meta-val">8,500</span><span class="meta-key">Beneficiaries</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">5</span><span class="meta-key">Wells</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">2,847</span><span class="meta-key">Donors</span></div>
+        </div>
+        <div class="campaign-detail-row">
+          <span>📍 Mali &amp; Burkina Faso</span>
+          <span>🤝 Water For Good</span>
+        </div>
         <div class="progress-wrap">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.4rem;">
+            <span style="color:var(--accent);font-weight:700;">73% funded</span>
+            <span style="color:var(--muted);">3 of 5 wells drilled</span>
+          </div>
           <div class="progress-bar"><div class="progress-fill" style="width:73%"></div></div>
           <div class="progress-meta"><span><strong>₦100.4M</strong> raised</span><span>₦137.2M goal</span></div>
         </div>
-        <button class="btn-donate" onclick="scrollToForm()">Donate to This</button>
+        <button class="btn-donate" onclick="scrollToForm()">Donate to This Campaign</button>
       </div>
     </div>
 
+    <!-- CAMPAIGN 2 -->
     <div class="campaign-card">
-      <div class="campaign-img" style="background: linear-gradient(135deg,#1a2a1a,#1f2d35);">📚</div>
+      <div class="campaign-img" style="background: linear-gradient(135deg,#0d1f0d,#0d1f2a);">
+        <span style="font-size:3.5rem;">📚</span>
+      </div>
       <div class="campaign-body">
-        <span class="campaign-tag">Education</span>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.85rem;">
+          <span class="campaign-tag">Education</span>
+          <span class="campaign-tag" style="color:#34c98c;border-color:#34c98c;background:rgba(52,201,140,0.08);">✓ On track</span>
+        </div>
         <h3>Schools Without Borders</h3>
-        <p>Building classrooms and training teachers for 2,000 children in rural Cambodia.</p>
+        <p style="margin-bottom:0.75rem;">Constructing 4 permanent classrooms and a library across 2 primary schools in Kampong Thom province, Cambodia — and funding a 12-month teacher training programme. 2,000 children currently study in flood-prone bamboo shelters with no electricity.</p>
+        <div class="campaign-meta-row">
+          <div class="campaign-meta-item"><span class="meta-val">2,000</span><span class="meta-key">Children</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">18</span><span class="meta-key">Teachers</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">1,923</span><span class="meta-key">Donors</span></div>
+        </div>
+        <div class="campaign-detail-row">
+          <span>📍 Kampong Thom, Cambodia</span>
+          <span>🤝 Room to Read</span>
+        </div>
         <div class="progress-wrap">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.4rem;">
+            <span style="color:var(--accent);font-weight:700;">58% funded</span>
+            <span style="color:var(--muted);">41 days remaining</span>
+          </div>
           <div class="progress-bar"><div class="progress-fill" style="width:58%"></div></div>
           <div class="progress-meta"><span><strong>₦63.7M</strong> raised</span><span>₦109.8M goal</span></div>
         </div>
-        <button class="btn-donate" onclick="scrollToForm()">Donate to This</button>
+        <button class="btn-donate" onclick="scrollToForm()">Donate to This Campaign</button>
       </div>
     </div>
 
+    <!-- CAMPAIGN 3 -->
     <div class="campaign-card">
-      <div class="campaign-img" style="background: linear-gradient(135deg,#2a1a1a,#35201f);">🏥</div>
+      <div class="campaign-img" style="background: linear-gradient(135deg,#1f0d0d,#2a1010);">
+        <span style="font-size:3.5rem;">🏥</span>
+      </div>
       <div class="campaign-body">
-        <span class="campaign-tag">Healthcare</span>
-        <h3>Mobile Clinics Initiative</h3>
-        <p>Deploying mobile medical units to serve 15,000 people in underserved areas of Kenya.</p>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.85rem;">
+          <span class="campaign-tag">Healthcare</span>
+          <span class="campaign-tag" style="color:#f5a623;border-color:#f5a623;background:rgba(245,166,35,0.08);">🔥 8 days left</span>
+        </div>
+        <h3>Mobile Clinics — Kenya</h3>
+        <p style="margin-bottom:0.75rem;">Funding 3 fully equipped mobile medical units — each staffed by a doctor, nurse, and community health worker — to serve 15 underserved settlements across Turkana and Marsabit counties. Services include maternal care, child immunisation, malaria testing, and TB screening.</p>
+        <div class="campaign-meta-row">
+          <div class="campaign-meta-item"><span class="meta-val">15,000</span><span class="meta-key">Patients/yr</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">3</span><span class="meta-key">Clinics</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">3,412</span><span class="meta-key">Donors</span></div>
+        </div>
+        <div class="campaign-detail-row">
+          <span>📍 Turkana &amp; Marsabit, Kenya</span>
+          <span>🤝 Amref Health Africa</span>
+        </div>
         <div class="progress-wrap">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.4rem;">
+            <span style="color:var(--accent);font-weight:700;">89% funded</span>
+            <span style="color:var(--muted);">Almost there — help close the gap</span>
+          </div>
           <div class="progress-bar"><div class="progress-fill" style="width:89%"></div></div>
           <div class="progress-meta"><span><strong>₦122.1M</strong> raised</span><span>₦137.2M goal</span></div>
         </div>
-        <button class="btn-donate" onclick="scrollToForm()">Donate to This</button>
+        <button class="btn-donate" onclick="scrollToForm()">Donate to This Campaign</button>
       </div>
     </div>
+
+    <!-- CAMPAIGN 4 -->
+    <div class="campaign-card">
+      <div class="campaign-img" style="background: linear-gradient(135deg,#1a1200,#2a1a00);">
+        <span style="font-size:3.5rem;">🌾</span>
+      </div>
+      <div class="campaign-body">
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.85rem;">
+          <span class="campaign-tag">Food Security</span>
+          <span class="campaign-tag" style="color:#34c98c;border-color:#34c98c;background:rgba(52,201,140,0.08);">✓ New campaign</span>
+        </div>
+        <h3>Hunger Relief — Horn of Africa</h3>
+        <p style="margin-bottom:0.75rem;">Delivering 50,000 emergency food packages — each containing a 30-day supply of fortified maize, lentils, cooking oil, and micronutrient sachets — to 210,000 acutely malnourished people in South Sudan's Unity State and Ethiopia's Somali Region, where drought has wiped out two consecutive harvests.</p>
+        <div class="campaign-meta-row">
+          <div class="campaign-meta-item"><span class="meta-val">210K</span><span class="meta-key">People fed</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">50K</span><span class="meta-key">Packages</span></div>
+          <div class="campaign-meta-item"><span class="meta-val">1,204</span><span class="meta-key">Donors</span></div>
+        </div>
+        <div class="campaign-detail-row">
+          <span>📍 South Sudan &amp; Ethiopia</span>
+          <span>🤝 WFP Partner NGO</span>
+        </div>
+        <div class="progress-wrap">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.4rem;">
+            <span style="color:var(--accent);font-weight:700;">40% funded</span>
+            <span style="color:var(--muted);">67 days remaining</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+          <div class="progress-meta"><span><strong>₦82.4M</strong> raised</span><span>₦206M goal</span></div>
+        </div>
+        <button class="btn-donate" onclick="scrollToForm()">Donate to This Campaign</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
