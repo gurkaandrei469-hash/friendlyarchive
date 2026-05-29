@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HopeForward — Give Today</title>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -745,13 +746,35 @@
   function handleDonate() {
     const custom = document.getElementById('customAmount').value;
     const amount = custom ? parseFloat(custom) : selectedAmount;
+    const email = document.querySelector('input[type="email"]').value.trim();
+    const firstName = document.querySelectorAll('.form-input')[0].value.trim();
+    const lastName = document.querySelectorAll('.form-input')[1].value.trim();
+
     if (!amount || amount < 1) {
       document.getElementById('customAmount').focus();
       return;
     }
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
+    if (!email) {
+      document.querySelector('input[type="email"]').focus();
+      return;
+    }
+
+    const handler = PaystackPop.setup({
+      key: 'pk_live_943ee93759c37bb4e59140957f88808ad242a33f',
+      email: email,
+      amount: Math.round(amount * 100), // kobo
+      currency: 'NGN',
+      firstname: firstName || undefined,
+      lastname: lastName || undefined,
+      label: 'HopeForward Donation',
+      onClose: function() {},
+      callback: function(response) {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 5000);
+      }
+    });
+    handler.openIframe();
   }
 </script>
 </body>
